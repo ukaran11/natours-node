@@ -4,6 +4,17 @@ dotenv.config({ path: './config.env' });
 
 const app = require('./app');
 
+const DB = process.env.DATABASE.replace(
+  '<PASSWORD>',
+  process.env.DATABASE_PASSWORD
+);
+
+mongoose
+  .connect(DB, {
+    useNewUrlParser: true,
+  })
+  .then(() => console.log('DB Connection successful'));
+
 // console.log(process.env)
 const port = process.env.PORT || 3000;
 
